@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>TijariQA</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TijariQA TestBank - Question & Answer Management System</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ----------- CSS ----------- */
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
+:root {--primary:#27ae60;--primary-dark:#219653;--secondary:#2c3e50;--accent:#e74c3c;--light:#ecf0f1;--dark:#2c3e50;--success:#27ae60;--warning:#f39c12;--danger:#e74c3c;--gray:#95a5a6;}
+body {background-color:#f5f7fa;color:var(--dark);line-height:1.6;}
+.container {width:100%;max-width:1200px;margin:0 auto;padding:0 20px;}
+header {background:linear-gradient(135deg,var(--primary),var(--secondary));color:white;padding:1rem 0;box-shadow:0 4px 12px rgba(0,0,0,0.1);position:sticky;top:0;z-index:100;}
+nav {display:flex;justify-content:space-between;align-items:center;}
+.logo {font-size:1.8rem;font-weight:700;display:flex;align-items:center;}
+.logo i {margin-right:10px;color:var(--light);}
+.nav-links {display:flex;gap:1.5rem;}
+.nav-links a {color:white;text-decoration:none;font-weight:500;transition:all 0.3s ease;padding:0.5rem 1rem;border-radius:4px;}
+.nav-links a:hover {background-color:rgba(255,255,255,0.1);}
+.nav-links a.active {background-color:rgba(255,255,255,0.2);}
+.auth-buttons {display:flex;gap:1rem;}
+.btn {padding:0.6rem 1.2rem;border:none;border-radius:4px;cursor:pointer;font-weight:600;transition:all 0.3s ease;text-align:center;display:inline-block;text-decoration:none;}
+.btn-primary {background-color:var(--primary);color:white;}
+.btn-primary:hover {background-color:var(--primary-dark);}
+.btn-outline {background-color:transparent;border:2px solid white;color:white;}
+.btn-outline:hover {background-color:white;color:var(--primary);}
+.page {display:none;padding:2rem 0;min-height:calc(100vh - 180px);}
+.page.active {display:block;animation:fadeIn 0.5s ease;}
+@keyframes fadeIn {from {opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hero {background:linear-gradient(rgba(39,174,96,0.9),rgba(44,62,80,0.9)),url('https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');background-size:cover;background-position:center;color:white;padding:4rem 2rem;border-radius:10px;text-align:center;margin-bottom:2rem;}
+.hero h1 {font-size:2.5rem;margin-bottom:1rem;}
+.hero p {font-size:1.2rem;margin-bottom:2rem;max-width:700px;margin-left:auto;margin-right:auto;}
+.features {display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-bottom:3rem;}
+.feature-card {background-color:white;border-radius:10px;padding:2rem;box-shadow:0 5px 15px rgba(0,0,0,0.1);text-align:center;transition:transform 0.3s ease;}
+.feature-card:hover {transform:translateY(-5px);}
+.feature-card i {font-size:3rem;color:var(--primary);margin-bottom:1rem;}
+.feature-card h3 {margin-bottom:1rem;color:var(--secondary);}
+.form-container {max-width:500px;margin:0 auto;background-color:white;padding:2rem;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+.form-title {text-align:center;margin-bottom:2rem;color:var(--secondary);}
+.form-group {margin-bottom:1.5rem;}
+.form-group label {display:block;margin-bottom:0.5rem;font-weight:500;}
+.form-control {width:100%;padding:0.75rem;border:1px solid #ddd;border-radius:4px;font-size:1rem;}
+.form-control:focus {outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(39,174,96,0.2);}
+.service-header {display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;}
+.user-greeting {background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;padding:1.5rem;border-radius:10px;margin-bottom:2rem;text-align:center;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+.search-container {background-color:white;padding:1.5rem;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.1);margin-bottom:2rem;}
+.search-box {display:flex;width:100%;}
+.search-box input {flex:1;padding:0.75rem;border:1px solid #ddd;border-radius:4px 0 0 4px;font-size:1rem;}
+.search-box button {padding:0.75rem 1.5rem;background-color:var(--primary);color:white;border:none;border-radius:0 4px 4px 0;cursor:pointer;}
+.search-box button:hover {background-color:var(--primary-dark);}
+.qa-list {display:grid;gap:1.5rem;}
+.qa-item {background-color:white;border-radius:10px;padding:1.5rem;box-shadow:0 3px 10px rgba(0,0,0,0.1);position:relative;}
+.qa-item h3 {color:var(--secondary);margin-bottom:0.5rem;font-size:1.2rem;}
+.qa-item p {margin-bottom:1rem;line-height:1.8;}
+.qa-actions {display:flex;gap:0.5rem;margin-top:1rem;}
+.btn-sm {padding:0.4rem 0.8rem;font-size:0.9rem;}
+.btn-success {background-color:var(--success);color:white;}
+.btn-success:hover {background-color:#229954;}
+.btn-warning {background-color:var(--warning);color:white;}
+.btn-warning:hover {background-color:#e67e22;}
+.btn-danger {background-color:var(--danger);color:white;}
+.btn-danger:hover {background-color:#c0392b;}
+.admin-section {background-color:white;border-radius:10px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 3px 10px rgba(0,0,0,0.1);}
+.admin-section h2 {color:var(--secondary);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:2px solid var(--light);}
+.user-list {display:grid;gap:1rem;}
+.user-item {display:flex;justify-content:space-between;align-items:center;padding:1rem;background-color:var(--light);border-radius:6px;}
+.user-info h4 {color:var(--secondary);margin-bottom:0.25rem;}
+.user-info p {color:var(--gray);font-size:0.9rem;}
+.contact-info {background-color:white;border-radius:10px;padding:2rem;box-shadow:0 5px 15px rgba(0,0,0,0.1);margin-bottom:2rem;}
+.contact-info h2 {color:var(--secondary);margin-bottom:1.5rem;}
+.contact-details {display:grid;gap:1rem;}
+.contact-item {display:flex;align-items:center;gap:1rem;}
+.contact-item i {font-size:1.5rem;color:var(--primary);}
+footer {background-color:var(--secondary);color:white;padding:2rem 0;margin-top:3rem;}
+.footer-content {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;}
+.footer-section h3 {margin-bottom:1rem;font-size:1.2rem;}
+.footer-section p {margin-bottom:0.5rem;}
+.footer-bottom {text-align:center;padding-top:2rem;margin-top:2rem;border-top:1px solid rgba(255,255,255,0.1);}
+.alert {padding:1rem;border-radius:4px;margin-bottom:1rem;font-weight:500;}
+.alert-success {background-color:rgba(39,174,96,0.2);color:var(--success);border-left:4px solid var(--success);}
+.alert-error {background-color:rgba(231,76,60,0.2);color:var(--danger);border-left:4px solid var(--danger);}
+.hidden {display:none !important;}
+.modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.5);z-index:1000;justify-content:center;align-items:center;}
+.modal-content {background-color:white;padding:2rem;border-radius:10px;width:90%;max-width:600px;max-height:80vh;overflow-y:auto;}
+.modal-header {display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
+.close-modal {font-size:1.5rem;cursor:pointer;color:var(--gray);}
+.close-modal:hover {color:var(--danger);}
+.highlight {background-color:yellow;color:var(--dark);padding:2px 4px;border-radius:3px;}
+.login-required {text-align:center;padding:3rem;background-color:white;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+.login-required i {font-size:4rem;color:var(--primary);margin-bottom:1rem;}
+.login-required h2 {color:var(--secondary);margin-bottom:1rem;}
+.login-required p {color:var(--gray);margin-bottom:2rem;}
+.nav-item.protected {position:relative;}
+.nav-item.protected.disabled {opacity:0.6;cursor:not-allowed;}
+.stats-container {display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem;}
+.stat-card {background-color:white;padding:1.5rem;border-radius:10px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,0.1);}
+.stat-card i {font-size:2rem;color:var(--primary);margin-bottom:0.5rem;}
+.stat-card h3 {font-size:2rem;color:var(--secondary);margin-bottom:0.5rem;}
+.stat-card p {color:var(--gray);}
+@media(max-width:768px){
+    .nav-links{display:none;}
+    .features{grid-template-columns:1fr;}
+    .service-header{flex-direction:column;gap:1rem;}
+    .search-box{width:100%;}
+    .stats-container{grid-template-columns:1fr;}
+    .qa-actions{flex-direction:column;gap:0.5rem;}
+    .user-item{flex-direction:column;gap:1rem;align-items:stretch;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+<nav>
+<div class="logo"><i class="fas fa-database"></i>TijariQA TestBank</div>
+<div class="nav-links">
+<a href="#" class="active" data-page="home">Home</a>
+<a href="#" data-page="register" class="nav-item">Register</a>
+<a href="#" data-page="login" class="nav-item">Login</a>
+<a href="#" data-page="service" class="nav-item protected" id="serviceNavLink">Service</a>
+<a href="#" data-page="contact">Contact Us</a>
+</div>
+<div class="auth-buttons">
+<button class="btn btn-outline hidden" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+</div>
+</nav>
+</div>
+</header>
+
+<div class="container">
+<div id="alertContainer"></div>
+</div>
+
+<main>
+<!-- Home Page -->
+<div id="home" class="page active">
+<div class="container">
+<div class="hero">
+<h1>Welcome to TijariQA TestBank</h1>
+<p>Your comprehensive question & answer management system for educational excellence. Create, manage, and access test banks with ease.</p>
+<div style="margin-top: 2rem;">
+<a href="#" class="btn btn-primary" data-page="register" style="margin-right: 1rem;">Get Started</a>
+<a href="#" class="btn btn-outline" data-page="login">Login</a>
+</div>
+</div>
+<div class="features">
+<div class="feature-card">
+<i class="fas fa-user-plus"></i>
+<h3>Easy Registration</h3>
+<p>Create your account quickly with our streamlined registration process. Choose between user and admin roles.</p>
+</div>
+<div class="feature-card">
+<i class="fas fa-search"></i>
+<h3>Smart Search</h3>
+<p>Find questions and answers instantly with our powerful search functionality and real-time filtering.</p>
+</div>
+<div class="feature-card">
+<i class="fas fa-database"></i>
+<h3>Test Bank Management</h3>
+<p>Administrators can add, edit, and delete questions while users can browse and search the knowledge base.</p>
+</div>
+<div class="feature-card">
+<i class="fas fa-users"></i>
+<h3>User Management</h3>
+<p>Admin panel includes comprehensive user management with role-based access control.</p>
+</div>
+<div class="feature-card">
+<i class="fas fa-shield-alt"></i>
+<h3>Secure Access</h3>
+<p>Protected service area ensures only authenticated users can access the test bank features.</p>
+</div>
+<div class="feature-card">
+<i class="fas fa-mobile-alt"></i>
+<h3>Responsive Design</h3>
+<p>Access your test bank from any device with our fully responsive web application.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Register Page -->
+<div id="register" class="page">
+<div class="container">
+<div class="form-container">
+<h2 class="form-title"><i class="fas fa-user-plus"></i> Create Account</h2>
+<form id="registerForm">
+<div class="form-group">
+<label for="regName">Full Name</label>
+<input type="text" id="regName" class="form-control" required placeholder="Enter your full name">
+</div>
+<div class="form-group">
+<label for="regPhone">Phone Number</label>
+<input type="tel" id="regPhone" class="form-control" required placeholder="Enter your phone number">
+</div>
+<div class="form-group">
+<label for="regRole">Account Type</label>
+<select id="regRole" class="form-control">
+<option value="user">User (View & Search Only)</option>
+<option value="admin">Admin (Full Access)</option>
+</select>
+</div>
+<div class="form-group">
+<label for="regEmail">Email Address</label>
+<input type="email" id="regEmail" class="form-control" required placeholder="Enter your email address">
+</div>
+<div class="form-group">
+<label for="regPassword">Password</label>
+<input type="password" id="regPassword" class="form-control" required placeholder="Create a strong password" minlength="6">
+</div>
+<button class="btn btn-primary" type="submit" style="width: 100%;">
+<i class="fas fa-user-plus"></i> Create Account
+</button>
+</form>
+<div style="text-align: center; margin-top: 1rem;">
+<p>Already have an account? <a href="#" data-page="login" style="color: var(--primary);">Login here</a></p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Login Page -->
+<div id="login" class="page">
+<div class="container">
+<div class="form-container">
+<h2 class="form-title"><i class="fas fa-sign-in-alt"></i> Login</h2>
+<form id="loginForm">
+<div class="form-group">
+<label for="loginEmail">Email Address</label>
+<input type="email" id="loginEmail" class="form-control" required placeholder="Enter your email">
+</div>
+<div class="form-group">
+<label for="loginPassword">Password</label>
+<input type="password" id="loginPassword" class="form-control" required placeholder="Enter your password">
+</div>
+<button class="btn btn-primary" type="submit" style="width: 100%;">
+<i class="fas fa-sign-in-alt"></i> Sign In
+</button>
+</form>
+<div style="text-align: center; margin-top: 1rem;">
+<p>Don't have an account? <a href="#" data-page="register" style="color: var(--primary);">Register here</a></p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Service Page -->
+<div id="service" class="page">
+<div class="container">
+<div id="loginRequired" class="login-required">
+<i class="fas fa-lock"></i>
+<h2>Access Restricted</h2>
+<p>Please login to access the TijariQA TestBank service and manage questions & answers.</p>
+<div>
+<a href="#" class="btn btn-primary" data-page="login" style="margin-right: 1rem;">Login</a>
+<a href="#" class="btn btn-outline" data-page="register">Register</a>
+</div>
+</div>
+
+<div id="serviceContent" class="hidden">
+<div id="userGreeting" class="user-greeting">
+<h2>Welcome to TijariQA TestBank</h2>
+<p id="greetingText">Loading...</p>
+</div>
+
+<!-- Statistics Dashboard -->
+<div id="statsContainer" class="stats-container hidden">
+<div class="stat-card">
+<i class="fas fa-question-circle"></i>
+<h3 id="totalQuestions">0</h3>
+<p>Total Questions</p>
+</div>
+<div class="stat-card">
+<i class="fas fa-users"></i>
+<h3 id="totalUsers">0</h3>
+<p>Total Users</p>
+</div>
+<div class="stat-card">
+<i class="fas fa-search"></i>
+<h3 id="searchCount">0</h3>
+<p>Searches Today</p>
+</div>
+</div>
+
+<!-- Admin Panel for User Management -->
+<div id="adminPanel" class="admin-section hidden">
+<h2><i class="fas fa-users-cog"></i> User Management</h2>
+<div id="userList" class="user-list">
+<div class="alert alert-success">Loading users...</div>
+</div>
+</div>
+
+<!-- Q&A Management Form (Admin Only) -->
+<div id="qaManagementForm" class="form-container hidden">
+<h2 class="form-title"><i class="fas fa-plus-circle"></i> Add New Question</h2>
+<form id="qaForm">
+<div class="form-group">
+<label for="newQuestion">Question</label>
+<input type="text" id="newQuestion" class="form-control" required placeholder="Enter the question">
+</div>
+<div class="form-group">
+<label for="newAnswer">Answer</label>
+<textarea id="newAnswer" class="form-control" required placeholder="Enter the answer" rows="4"></textarea>
+</div>
+<button class="btn btn-primary" type="submit" style="width: 100%;">
+<i class="fas fa-plus"></i> Add Question
+</button>
+</form>
+</div>
+
+<!-- Search Container -->
+<div class="search-container">
+<h3 style="margin-bottom: 1rem; color: var(--secondary);"><i class="fas fa-search"></i> Search Questions & Answers</h3>
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search for questions or answers..." class="form-control">
+<button class="btn btn-primary" id="searchBtn">
+<i class="fas fa-search"></i> Search
+</button>
+</div>
+</div>
+
+<!-- Q&A List -->
+<div id="qaList" class="qa-list">
+<div class="alert alert-success">Loading questions and answers...</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Contact Page -->
+<div id="contact" class="page">
+<div class="container">
+<div class="contact-info">
+<h2><i class="fas fa-envelope"></i> Contact Us</h2>
+<p style="margin-bottom: 2rem; color: var(--gray);">Get in touch with us for any questions or support regarding TijariQA TestBank.</p>
+<div class="contact-details">
+<div class="contact-item">
+<i class="fas fa-envelope"></i>
+<div>
+<h4>Email</h4>
+<span>hasoon.xpx@gmail.com</span>
+</div>
+</div>
+<div class="contact-item">
+<i class="fas fa-phone"></i>
+<div>
+<h4>Phone</h4>
+<span>+965 41440169</span>
+</div>
+</div>
+<div class="contact-item">
+<i class="fas fa-map-marker-alt"></i>
+<div>
+<h4>Address</h4>
+<span>Kuwait City, Kuwait</span>
+</div>
+</div>
+<div class="contact-item">
+<i class="fas fa-clock"></i>
+<div>
+<h4>Business Hours</h4>
+<span>Sunday - Thursday: 9:00 AM - 6:00 PM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Edit Modal -->
+<div id="editModal" class="modal">
+<div class="modal-content">
+<div class="modal-header">
+<h3><i class="fas fa-edit"></i> Edit Question & Answer</h3>
+<span class="close-modal">&times;</span>
+</div>
+<form id="editQaForm">
+<input type="hidden" id="editId">
+<div class="form-group">
+<label for="editQuestion">Question</label>
+<input type="text" id="editQuestion" class="form-control" required>
+</div>
+<div class="form-group">
+<label for="editAnswer">Answer</label>
+<textarea id="editAnswer" class="form-control" required rows="4"></textarea>
+</div>
+<button class="btn btn-primary" type="submit" style="width: 100%;">
+<i class="fas fa-save"></i> Save Changes
+</button>
+</form>
+</div>
+</div>
+
+</main>
+
+<!-- Footer -->
+<footer>
+<div class="container">
+<div class="footer-content">
+<div class="footer-section">
+<h3>About TijariQA TestBank</h3>
+<p>A comprehensive question and answer management system designed for educational porpse its a collection of previous exam questions and answers.</p>
+</div>
+<div class="footer-section">
+<h3>Contact Information</h3>
+<p><i class="fas fa-envelope"></i> hasoon.xpx@gmail.com</p>
+<p><i class="fas fa-phone"></i> +965 41440169</p>
+<p><i class="fas fa-map-marker-alt"></i> Kuwait City, Kuwait</p>
+</div>
+<div class="footer-section">
+<h3>Features</h3>
+<p>• Question & Answer Management</p>
+<p>• User Role Management</p>
+<p>• Advanced Search</p>
+<p>• Responsive Design</p>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2025 TijariQA TestBank. All rights reserved.</p>
+</div>
+</div>
+</footer>
+
+<script type="module">
+// -------- Supabase Configuration --------
+import { createClient } from 'https://cdn.skypack.dev/@supabase/supabase-js';
+
+// Replace these with your actual Supabase credentials
+const SUPABASE_URL = 'https://sblwqmulevcivwjwhlwd.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNibHdxbXVsZXZjaXZ3andobHdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY1NDA3MDMsImV4cCI6MjA3MjExNjcwM30.lAJxTGX8muP1E5f90l-DMIv8msVPQcCDsuKO92JgImo';
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// -------- Global Variables --------
+let currentUser = null;
+let currentUserData = null;
+let searchCount = 0;
+
+// -------- DOM Elements --------
+const alertContainer = document.getElementById('alertContainer');
+const pages = document.querySelectorAll('.page');
+const navLinks = document.querySelectorAll('.nav-links a');
+const logoutBtn = document.getElementById('logoutBtn');
+const searchInput = document.getElementById('searchInput');
+const searchBtn = document.getElementById('searchBtn');
+const editModal = document.getElementById('editModal');
+const closeModal = document.querySelector('.close-modal');
+const serviceNavLink = document.getElementById('serviceNavLink');
+
+// -------- Utility Functions --------
+function showPage(pageId) {
+    // Hide all pages
+    pages.forEach(p => p.classList.remove('active'));
+    
+    // Show selected page
+    const targetPage = document.getElementById(pageId);
+    if (targetPage) {
+        targetPage.classList.add('active');
+    }
+    
+    // Update navigation active states
+    navLinks.forEach(link => {
+        if (link.dataset.page === pageId) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+    
+    // Load page-specific content
+    if (pageId === 'service') {
+        loadServicePage();
+    }
+}
+
+function showAlert(message, type = 'success') {
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type}`;
+    alert.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i> ${message}`;
+    alertContainer.appendChild(alert);
+    
+    // Auto-remove alert after 5 seconds
+    setTimeout(() => {
+        if (alert.parentNode) {
+            alert.remove();
+        }
+    }, 5000);
+}
+
+function updateAuthUI(isLoggedIn) {
+    const authButtons = document.getElementById('logoutBtn');
+    const serviceLink = document.getElementById('serviceNavLink');
+    
+    if (isLoggedIn) {
+        authButtons.classList.remove('hidden');
+        serviceLink.classList.remove('disabled');
+        serviceLink.style.opacity = '1';
+        serviceLink.style.cursor = 'pointer';
+    } else {
+        authButtons.classList.add('hidden');
+        serviceLink.classList.add('disabled');
+        serviceLink.style.opacity = '0.6';
+        serviceLink.style.cursor = 'not-allowed';
+    }
+}
+
+// -------- Authentication Functions --------
+document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('regName').value.trim();
+    const phone = document.getElementById('regPhone').value.trim();
+    const role = document.getElementById('regRole').value;
+    const email = document.getElementById('regEmail').value.trim();
+    const password = document.getElementById('regPassword').value;
+    
+    if (password.length < 6) {
+        showAlert('Password must be at least 6 characters long', 'error');
+        return;
+    }
+    
+    try {
+        // Register user with Supabase Auth
+        const { data, error } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+            options: {
+                data: {
+                    name: name,
+                    phone: phone,
+                    role: role
+                }
+            }
+        });
+        
+        if (error) throw error;
+        
+        showAlert('Registration successful! Please check your email to verify your account.', 'success');
+        document.getElementById('registerForm').reset();
+        showPage('login');
+        
+    } catch (error) {
+        console.error('Registration error:', error);
+        showAlert('Registration failed: ' + error.message, 'error');
+    }
+});
+
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    
+    try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+        
+        if (error) throw error;
+        
+        currentUser = data.user;
+        await loadCurrentUserData();
+        
+        showAlert('Login successful! Welcome to TijariQA TestBank.', 'success');
+        document.getElementById('loginForm').reset();
+        updateAuthUI(true);
+        showPage('service');
+        
+    } catch (error) {
+        console.error('Login error:', error);
+        showAlert('Login failed: ' + error.message, 'error');
+    }
+});
+
+logoutBtn.addEventListener('click', async () => {
+    try {
+        const { error } = await supabase.auth.signOut();
+        if (error) throw error;
+        
+        currentUser = null;
+        currentUserData = null;
+        
+        showAlert('Logged out successfully', 'success');
+        updateAuthUI(false);
+        showPage('home');
+        
+    } catch (error) {
+        console.error('Logout error:', error);
+        showAlert('Logout failed: ' + error.message, 'error');
+    }
+});
+
+// -------- User Data Management --------
+async function loadCurrentUserData() {
+    if (!currentUser) return;
+    
+    try {
+        const { data, error } = await supabase
+            .from('users')
+            .select('*')
+            .eq('id', currentUser.id)
+            .single();
+        
+        if (error) throw error;
+        currentUserData = data;
+    } catch (error) {
+        console.error('Error loading user data:', error);
+        // If user doesn't exist in users table, create them
+        await createUserProfile();
+    }
+}
+
+async function createUserProfile() {
+    if (!currentUser) return;
+    
+    const userData = currentUser.user_metadata;
+    
+    try {
+        const { data, error } = await supabase
+            .from('users')
+            .insert([{
+                id: currentUser.id,
+                email: currentUser.email,
+                name: userData.name || 'Unknown',
+                phone: userData.phone || '',
+                role: userData.role || 'user',
+                created_at: new Date().toISOString()
+            }])
+            .select()
+            .single();
+        
+        if (error) throw error;
+        currentUserData = data;
+    } catch (error) {
+        console.error('Error creating user profile:', error);
+    }
+}
+
+// -------- Navigation Event Listeners --------
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const pageId = link.dataset.page;
+        
+        // Check if trying to access service page without login
+        if (pageId === 'service' && !currentUser) {
+            showAlert('Please login to access the service', 'error');
+            showPage('login');
+            return;
+        }
+        
+        showPage(pageId);
+    });
+});
+
+// Handle clicks on buttons with data-page attribute
+document.addEventListener('click', (e) => {
+    if (e.target.hasAttribute('data-page')) {
+        e.preventDefault();
+        const pageId = e.target.getAttribute('data-page');
+        
+        if (pageId === 'service' && !currentUser) {
+            showAlert('Please login to access the service', 'error');
+            showPage('login');
+            return;
+        }
+        
+        showPage(pageId);
+    }
+});
+
+// -------- Service Page Functions --------
+async function loadServicePage() {
+    const loginRequired = document.getElementById('loginRequired');
+    const serviceContent = document.getElementById('serviceContent');
+    const greetingText = document.getElementById('greetingText');
+    const adminPanel = document.getElementById('adminPanel');
+    const qaManagementForm = document.getElementById('qaManagementForm');
+    const statsContainer = document.getElementById('statsContainer');
+    
+    if (!currentUser) {
+        loginRequired.classList.remove('hidden');
+        serviceContent.classList.add('hidden');
+        return;
+    }
+    
+    loginRequired.classList.add('hidden');
+    serviceContent.classList.remove('hidden');
+    
+    // Update greeting
+    const userName = currentUserData?.name || currentUser.email;
+    const userRole = currentUserData?.role || 'user';
+    greetingText.textContent = `Hello ${userName}! You are logged in as ${userRole}.`;
+    
+    // Show/hide admin features
+    if (userRole === 'admin') {
+        adminPanel.classList.remove('hidden');
+        qaManagementForm.classList.remove('hidden');
+        statsContainer.classList.remove('hidden');
+        await loadUsers();
+        await loadStats();
+    } else {
+        adminPanel.classList.add('hidden');
+        qaManagementForm.classList.add('hidden');
+        statsContainer.classList.add('hidden');
+    }
+    
+    // Load Q&A list
+    await loadQAList();
+}
+
+// -------- Q&A Management Functions --------
+async function loadQAList() {
+    const qaList = document.getElementById('qaList');
+    qaList.innerHTML = '<div class="alert alert-success">Loading questions and answers...</div>';
+    
+    try {
+        const { data, error } = await supabase
+            .from('qa_items')
+            .select('*')
+            .order('created_at', { ascending: false });
+        
+        if (error) throw error;
+        
+        displayQAItems(data);
+        
+    } catch (error) {
+        console.error('Error loading Q&A:', error);
+        qaList.innerHTML = '<div class="alert alert-error">Failed to load questions and answers</div>';
+    }
+}
+
+function displayQAItems(items) {
+    const qaList = document.getElementById('qaList');
+    
+    if (!items || items.length === 0) {
+        qaList.innerHTML = '<div class="alert alert-error">No questions and answers found</div>';
+        return;
+    }
+    
+    qaList.innerHTML = '';
+    
+    items.forEach(item => {
+        const qaItem = document.createElement('div');
+        qaItem.className = 'qa-item';
+        
+        const isAdmin = currentUserData?.role === 'admin';
+        const adminActions = isAdmin ? `
+            <div class="qa-actions">
+                <button class="btn btn-sm btn-warning" onclick="editQA(${item.id}, '${item.question.replace(/'/g, "\\'")}', '${item.answer.replace(/'/g, "\\'")}')">
+                    <i class="fas fa-edit"></i> Edit
+                </button>
+                <button class="btn btn-sm btn-danger" onclick="deleteQA(${item.id})">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+            </div>
+        ` : '';
+        
+        qaItem.innerHTML = `
+            <h3><i class="fas fa-question-circle"></i> ${item.question}</h3>
+            <p><i class="fas fa-reply"></i> ${item.answer}</p>
+            ${adminActions}
+        `;
+        
+        qaList.appendChild(qaItem);
+    });
+}
+
+// -------- Add Q&A Form Handler --------
+document.getElementById('qaForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    if (currentUserData?.role !== 'admin') {
+        showAlert('Only administrators can add questions', 'error');
+        return;
+    }
+    
+    const question = document.getElementById('newQuestion').value.trim();
+    const answer = document.getElementById('newAnswer').value.trim();
+    
+    if (!question || !answer) {
+        showAlert('Please fill in both question and answer', 'error');
+        return;
+    }
+    
+    try {
+        const { data, error } = await supabase
+            .from('qa_items')
+            .insert([{
+                question: question,
+                answer: answer,
+                created_by: currentUser.id,
+                created_at: new Date().toISOString()
+            }]);
+        
+        if (error) throw error;
+        
+        showAlert('Question added successfully!', 'success');
+        document.getElementById('qaForm').reset();
+        await loadQAList();
+        await loadStats();
+        
+    } catch (error) {
+        console.error('Error adding Q&A:', error);
+        showAlert('Failed to add question: ' + error.message, 'error');
+    }
+});
+
+// -------- Edit Q&A Functions --------
+window.editQA = (id, question, answer) => {
+    if (currentUserData?.role !== 'admin') {
+        showAlert('Only administrators can edit questions', 'error');
+        return;
+    }
+    
+    editModal.style.display = 'flex';
+    document.getElementById('editId').value = id;
+    document.getElementById('editQuestion').value = question;
+    document.getElementById('editAnswer').value = answer;
+};
+
+closeModal.addEventListener('click', () => {
+    editModal.style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === editModal) {
+        editModal.style.display = 'none';
+    }
+});
+
+document.getElementById('editQaForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const id = document.getElementById('editId').value;
+    const question = document.getElementById('editQuestion').value.trim();
+    const answer = document.getElementById('editAnswer').value.trim();
+    
+    if (!question || !answer) {
+        showAlert('Please fill in both question and answer', 'error');
+        return;
+    }
+    
+    try {
+        const { data, error } = await supabase
+            .from('qa_items')
+            .update({ 
+                question: question, 
+                answer: answer,
+                updated_at: new Date().toISOString()
+            })
+            .eq('id', id);
+        
+        if (error) throw error;
+        
+        showAlert('Question updated successfully!', 'success');
+        editModal.style.display = 'none';
+        await loadQAList();
+        
+    } catch (error) {
+        console.error('Error updating Q&A:', error);
+        showAlert('Failed to update question: ' + error.message, 'error');
+    }
+});
+
+// -------- Delete Q&A Function --------
+window.deleteQA = async (id) => {
+    if (currentUserData?.role !== 'admin') {
+        showAlert('Only administrators can delete questions', 'error');
+        return;
+    }
+    
+    if (!confirm('Are you sure you want to delete this question? This action cannot be undone.')) {
+        return;
+    }
+    
+    try {
+        const { data, error } = await supabase
+            .from('qa_items')
+            .delete()
+            .eq('id', id);
+        
+        if (error) throw error;
+        
+        showAlert('Question deleted successfully!', 'success');
+        await loadQAList();
+        await loadStats();
+        
+    } catch (error) {
+        console.error('Error deleting Q&A:', error);
+        showAlert('Failed to delete question: ' + error.message, 'error');
+    }
+};
+
+// -------- Search Functions --------
+searchBtn.addEventListener('click', performSearch);
+searchInput.addEventListener('input', debounce(performSearch, 300));
+searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        performSearch();
+    }
+});
+
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+async function performSearch() {
+    const query = searchInput.value.trim();
+    
+    if (!query) {
+        await loadQAList();
+        return;
+    }
+    
+    searchCount++;
+    document.getElementById('searchCount').textContent = searchCount;
+    
+    try {
+        const { data, error } = await supabase
+            .from('qa_items')
+            .select('*')
+            .or(`question.ilike.%${query}%,answer.ilike.%${query}%`)
+            .order('created_at', { ascending: false });
+        
+        if (error) throw error;
+        
+        displaySearchResults(data, query);
+        
+    } catch (error) {
+        console.error('Search error:', error);
+        showAlert('Search failed: ' + error.message, 'error');
+    }
+}
+
+function displaySearchResults(items, query) {
+    const qaList = document.getElementById('qaList');
+    
+    if (!items || items.length === 0) {
+        qaList.innerHTML = `<div class="alert alert-error">No results found for "${query}"</div>`;
+        return;
+    }
+    
+    qaList.innerHTML = '';
+    
+    items.forEach(item => {
+        const qaItem = document.createElement('div');
+        qaItem.className = 'qa-item';
+        
+        // Highlight search terms
+        const regex = new RegExp(`(${query})`, 'gi');
+        const highlightedQuestion = item.question.replace(regex, '<span class="highlight">$1</span>');
+        const highlightedAnswer = item.answer.replace(regex, '<span class="highlight">$1</span>');
+        
+        const isAdmin = currentUserData?.role === 'admin';
+        const adminActions = isAdmin ? `
+            <div class="qa-actions">
+                <button class="btn btn-sm btn-warning" onclick="editQA(${item.id}, '${item.question.replace(/'/g, "\\'")}', '${item.answer.replace(/'/g, "\\'")}')">
+                    <i class="fas fa-edit"></i> Edit
+                </button>
+                <button class="btn btn-sm btn-danger" onclick="deleteQA(${item.id})">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+            </div>
+        ` : '';
+        
+        qaItem.innerHTML = `
+            <h3><i class="fas fa-question-circle"></i> ${highlightedQuestion}</h3>
+            <p><i class="fas fa-reply"></i> ${highlightedAnswer}</p>
+            ${adminActions}
+        `;
+        
+        qaList.appendChild(qaItem);
+    });
+}
+
+// -------- User Management Functions --------
+async function loadUsers() {
+    const userList = document.getElementById('userList');
+    userList.innerHTML = '<div class="alert alert-success">Loading users...</div>';
+    
+    try {
+        const { data, error } = await supabase
+            .from('users')
+            .select('*')
+            .order('created_at', { ascending: false });
+        
+        if (error) throw error;
+        
+        userList.innerHTML = '';
+        
+        if (!data || data.length === 0) {
+            userList.innerHTML = '<div class="alert alert-error">No users found</div>';
+            return;
+        }
+        
+        data.forEach(user => {
+            const userItem = document.createElement('div');
+            userItem.className = 'user-item';
+            
+            const canDelete = user.id !== currentUser.id; // Can't delete yourself
+            const deleteButton = canDelete ? 
+                `<button class="btn btn-sm btn-danger" onclick="deleteUser('${user.id}')">
+                    <i class="fas fa-trash"></i> Delete
+                </button>` : 
+                `<span style="color: var(--gray); font-size: 0.9rem;">Current User</span>`;
+            
+            userItem.innerHTML = `
+                <div class="user-info">
+                    <h4><i class="fas fa-user"></i> ${user.name || 'Unknown'}</h4>
+                    <p><i class="fas fa-envelope"></i> ${user.email}</p>
+                    <p><i class="fas fa-user-tag"></i> Role: ${user.role}</p>
+                    <p><i class="fas fa-phone"></i> ${user.phone || 'N/A'}</p>
+                </div>
+                ${deleteButton}
+            `;
+            
+            userList.appendChild(userItem);
+        });
+        
+    } catch (error) {
+        console.error('Error loading users:', error);
+        userList.innerHTML = '<div class="alert alert-error">Failed to load users</div>';
+    }
+}
+
+window.deleteUser = async (userId) => {
+    if (currentUserData?.role !== 'admin') {
+        showAlert('Only administrators can delete users', 'error');
+        return;
+    }
+    
+    if (userId === currentUser.id) {
+        showAlert('You cannot delete your own account', 'error');
+        return;
+    }
+    
+    if (!confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
+        return;
+    }
+    
+    try {
+        const { data, error } = await supabase
+            .from('users')
+            .delete()
+            .eq('id', userId);
+        
+        if (error) throw error;
+        
+        showAlert('User deleted successfully!', 'success');
+        await loadUsers();
+        await loadStats();
+        
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        showAlert('Failed to delete user: ' + error.message, 'error');
+    }
+};
+
+// -------- Statistics Functions --------
+async function loadStats() {
+    try {
+        // Load total questions
+        const { data: qaData, error: qaError } = await supabase
+            .from('qa_items')
+            .select('id', { count: 'exact' });
+        
+        if (qaError) throw qaError;
+        
+        // Load total users
+        const { data: userData, error: userError } = await supabase
+            .from('users')
+            .select('id', { count: 'exact' });
+        
+        if (userError) throw userError;
+        
+        document.getElementById('totalQuestions').textContent = qaData.length || 0;
+        document.getElementById('totalUsers').textContent = userData.length || 0;
+        document.getElementById('searchCount').textContent = searchCount;
+        
+    } catch (error) {
+        console.error('Error loading stats:', error);
+    }
+}
+
+// -------- Initialize Application --------
+async function initializeApp() {
+    try {
+        const { data: { user } } = await supabase.auth.getUser();
+        
+        if (user) {
+            currentUser = user;
+            await loadCurrentUserData();
+            updateAuthUI(true);
+        } else {
+            updateAuthUI(false);
+        }
+        
+    } catch (error) {
+        console.error('Error initializing app:', error);
+        updateAuthUI(false);
+    }
+}
+
+// -------- Auth State Change Listener --------
+supabase.auth.onAuthStateChange((event, session) => {
+    if (event === 'SIGNED_IN') {
+        currentUser = session.user;
+        loadCurrentUserData();
+        updateAuthUI(true);
+    } else if (event === 'SIGNED_OUT') {
+        currentUser = null;
+        currentUserData = null;
+        updateAuthUI(false);
+    }
+});
+
+// -------- Start Application --------
+document.addEventListener('DOMContentLoaded', () => {
+    initializeApp();
+});
+</script>
+</body>
+</html>
+<!-- partial -->
+  <script src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'></script>
+</body>
+</html>
